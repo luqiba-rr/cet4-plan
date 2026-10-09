@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>四级备考规划师 · 智能学习应用</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ============ 登录 / 注册 ============ -->
+<div id="authView" class="auth-wrap">
+  <div class="auth-card">
+    <h1>📘 大学英语四级备考规划师</h1>
+    <p class="sub">摸底诊断 → 技巧传授 → 带练刷题 → 冲刺押题</p>
+    <div class="hint">首次使用请设置「姓名+专属密码」注册建档；老学员验证后自动恢复历史档案。数据仅保存在本浏览器。</div>
+
+    <div class="field"><label>姓名</label><input id="authName" placeholder="请输入你的姓名"></div>
+    <div class="field"><label>专属密码</label><input id="authPass" type="password" placeholder="设置一个只有你知道的密码"></div>
+    <div class="err" id="authErr"></div>
+
+    <button class="btn" id="btnRegister">注册并建档</button>
+    <button class="btn ghost" id="btnLogin" style="margin-top:10px">登录（老学员）</button>
+  </div>
+</div>
+
+<!-- ============ 信息采集向导 ============ -->
+<div id="onboardView" class="auth-wrap hidden">
+  <div class="auth-card">
+    <h1>建立你的专属档案</h1>
+    <p class="sub">3项核心信息 + 薄弱项，缺一不可</p>
+    <div class="steps-dots"><span class="on"></span><span></span><span></span><span></span></div>
+
+    <div class="field"><label>① 当前英语基础</label>
+      <select id="obLevel">
+        <option value="weak">基础很差 / 高考英语 < 90</option>
+        <option value="normal">基础一般 / 四级 380-425</option>
+        <option value="ok">有一定基础（425+）</option>
+      </select>
+    </div>
+    <div class="field"><label>② 备考剩余时长</label>
+      <select id="obDuration">
+        <option value="1">1个月</option>
+        <option value="2" selected>2个月</option>
+        <option value="3">3个月</option>
+        <option value="4" >4个月</option>
+        <option value="6">半年</option>
+      </select>
+    </div>
+    <div class="field"><label>③ 每日可投入学习时长（小时）</label>
+      <input id="obDaily" type="number" step="0.5" min="0.5" value="2.5">
+    </div>
+    <div class="field"><label>④ 最薄弱题型</label>
+      <select id="obWeak">
+        <option value="听力">听力</option>
+        <option value="阅读">阅读</option>
+        <option value="写作">写作</option>
+        <option value="翻译">翻译</option>
+      </select>
+    </div>
+    <div class="err" id="obErr"></div>
+    <button class="btn" id="btnFinishOnboard">生成我的备考计划与档案</button>
+  </div>
+</div>
+
+<!-- ============ 应用主体 ============ -->
+<div id="appView" class="app hidden">
+  <aside class="sidebar">
+    <div class="logo">📘 四级备考规划师</div>
+    <div class="logo-sub">四阶段体系 · 本地档案</div>
+    <nav id="nav">
+      <div class="nav-item active" data-view="home"><span class="ico">🏠</span> 首页</div>
+      <div class="nav-item" data-view="plan"><span class="ico">📅</span> 备考计划</div>
+      <div class="nav-item" data-view="resource"><span class="ico">🗂️</span> 资料库</div>
+      <div class="nav-item" data-view="tech"><span class="ico">🎯</span> 技巧库</div>
+      <div class="nav-item" data-view="xhs"><span class="ico">📕</span> 上岸经验</div>
+      <div class="nav-item" data-view="log"><span class="ico">✏️</span> 学习记录</div>
+      <div class="nav-item" data-view="archive"><span class="ico">📇</span> 我的档案</div>
+    </nav>
+    <div class="side-foot">
+      <div class="who" id="sideName">—</div>
+      <div id="sideStage" style="color:var(--ink-2);font-size:12px"></div>
+      <div class="logout" id="btnLogout">退出登录</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div class="cmd"><input id="cmdInput" placeholder="输入快捷指令，如：查看计划 / 听力资料 / 单词推荐 …（回车触发）"></div>
+    </div>
+    <div class="quick-chips" id="quickChips">
+      <span class="chip" data-cmd="查看计划">查看计划</span>
+      <span class="chip" data-cmd="查看档案">查看档案</span>
+      <span class="chip" data-cmd="听力资料">听力资料</span>
+      <span class="chip" data-cmd="阅读资料">阅读资料</span>
+      <span class="chip" data-cmd="写作资料">写作资料</span>
+      <span class="chip" data-cmd="技巧汇总">技巧汇总</span>
+      <span class="chip" data-cmd="上岸经验">上岸经验</span>
+      <span class="chip" data-cmd="单词推荐">单词推荐</span>
+    </div>
+
+    <div id="viewHome"></div>
+    <div id="viewPlan" class="hidden"></div>
+    <div id="viewResource" class="hidden"></div>
+    <div id="viewTech" class="hidden"></div>
+    <div id="viewXhs" class="hidden"></div>
+    <div id="viewLog" class="hidden"></div>
+    <div id="viewArchive" class="hidden"></div>
+  </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
